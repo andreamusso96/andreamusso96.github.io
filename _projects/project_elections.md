@@ -94,7 +94,7 @@ It looks like central regions of Paris have a lower entropy of mobile traffic co
 That is, people in central regions consume mobile traffic more similarly than people in the periphery.
 However, there is much less variation in the entropy of mobile traffic consumption than in the entropy of election results.
 
-In any case, we can plot the two quantities against each other in a **correlation plot**:
+We can plot the two quantities against each other in a **correlation plot**:
 
 <div class="l-page">
   <iframe src="{{ '/assets/election_project/entropy_service_vs_entropy_election.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
