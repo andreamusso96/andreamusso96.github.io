@@ -58,13 +58,13 @@ We explore a captivating question - does a correlation exist between the diversi
 Focusing on Paris, we delve into the variability of voting preferences during the 2019 European election. This diversity is quantified using the concept of entropy, an effective measure of the divergence in the public's voting decisions (For further information on entropy, see [here](https://en.wikipedia.org/wiki/Entropy_(information_theory))). A higher entropy indicates a more heterogeneous range of voting choices. The interactive map below presents the **entropy of election results** in Paris:
 
 <div class="l-page fixed-prop-container">
-  <iframe src="{{ '/assets/election_project/vote_entropy_map.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
+  <iframe src="{{ '/assets/election_project/entropy_elections_map.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
 Upon observation, it appears that Paris' central regions exhibit lower entropy in election results compared to their peripheral counterparts, suggesting a more homogeneous voting pattern in the city center. What about mobile data consumption? Similar to our analysis of election results, we can apply the concept of entropy to mobile traffic consumption, highlighting differences in data usage across the population. The map of Paris below illustrates this:
 
 <div class="l-page fixed-prop-container">
-  <iframe src="{{ '/assets/election_project/consumption_entropy_map.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
+  <iframe src="{{ '/assets/election_project/entropy_consumption_map.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
 </div>
 
 Similarly, Paris' central regions display a lower entropy in mobile traffic consumption than the periphery, pointing towards more uniform data usage patterns in these areas. However, the fluctuation in mobile traffic entropy seems less pronounced than that of the election results.
