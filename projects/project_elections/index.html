@@ -222,9 +222,9 @@
 
         <h2 id="definitions">Definitions</h2>
 
-<p>Let $p$ be the probability distribution of votes in an election in a given location.
+<p>Let \(p\) be the probability distribution of votes in an election in a given location.
 That is, \(p_i\) is the probability that a randomly chosen voter in the location votes for party \(i\).
-The entropy ofthe distribution $p$ is defined as</p>
+The entropy ofthe distribution \(p\) is defined as</p>
 
 \[H(p) = - \sum_{i=1}^n p_i \log p_i\]
 
@@ -241,8 +241,8 @@ The more diverse the votes, the higher the entropy. See <a href="https://en.wiki
 
 <p>Here is an interactive map of the <strong>entropy of election results</strong>:</p>
 
-<div class="l-page">
-  <iframe src="/assets/election_project/vote_entropy_map.html" frameborder="0" scrolling="yes" height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/election_project/vote_entropy_map.html" style="border: 1px dashed grey;"></iframe>
 </div>
 
 <p>What do we observe? It looks like central regions of Paris have a lower entropy of election results than the periphery. 
@@ -250,7 +250,7 @@ That is, people in central regions vote more similarly than people in the periph
 
 <p>Here is an interactive map of the <strong>entropy of mobile traffic consumption</strong>:</p>
 
-<div class="l-page">
+<div class="l-page fixed-prop-container">
   <iframe src="/assets/election_project/consumption_entropy_map.html" frameborder="0" scrolling="yes" height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
 </div>
 
@@ -260,7 +260,7 @@ However, there is much less variation in the entropy of mobile traffic consumpti
 
 <p>We can plot the two quantities against each other in a <strong>correlation plot</strong>:</p>
 
-<div class="l-page">
+<div class="l-page fixed-prop-container">
   <iframe src="/assets/election_project/entropy_service_vs_entropy_election.html" frameborder="0" scrolling="yes" height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
 </div>
 
