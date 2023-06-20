@@ -56,9 +56,9 @@ _styles: >
 
 ## Definitions
 
-Let $p$ be the probability distribution of votes in an election in a given location.
+Let $$p$$ be the probability distribution of votes in an election in a given location.
 That is, $$p_i$$ is the probability that a randomly chosen voter in the location votes for party $$i$$.
-The entropy ofthe distribution $p$ is defined as
+The entropy ofthe distribution $$p$$ is defined as
 
 $$
 H(p) = - \sum_{i=1}^n p_i \log p_i
@@ -77,8 +77,9 @@ For the city of Paris, we plot the entropy of election results in the 2019 europ
 
 Here is an interactive map of the **entropy of election results**:
 
-<div class="l-page">
-  <iframe src="{{ '/assets/election_project/vote_entropy_map.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="{{ '/assets/election_project/vote_entropy_map.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
 What do we observe? It looks like central regions of Paris have a lower entropy of election results than the periphery. 
@@ -86,7 +87,7 @@ That is, people in central regions vote more similarly than people in the periph
 
 Here is an interactive map of the **entropy of mobile traffic consumption**:
 
-<div class="l-page">
+<div class="l-page fixed-prop-container">
   <iframe src="{{ '/assets/election_project/consumption_entropy_map.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
 </div>
 
@@ -96,7 +97,7 @@ However, there is much less variation in the entropy of mobile traffic consumpti
 
 We can plot the two quantities against each other in a **correlation plot**:
 
-<div class="l-page">
+<div class="l-page fixed-prop-container">
   <iframe src="{{ '/assets/election_project/entropy_service_vs_entropy_election.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
 </div>
 

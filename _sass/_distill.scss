@@ -149,3 +149,17 @@ d-appendix {
     }
   }
 }
+
+.fixed-prop-container {
+    position: relative;
+    padding-bottom: 56.25%; /* for 16:9 ratio, adjust as needed */
+    height: 0;
+    overflow: hidden;
+    }
+.fixed-prop-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
