@@ -13,7 +13,7 @@ authors:
   - name: Gianluca Risi
     affiliations:
       name: Politecnico di Milano
-  - name: Theodore Taillent
+  - name: Theodore Tallent
     affiliations:
       name: Sciences Po Paris
 
@@ -34,7 +34,7 @@ toc:
 _styles: >
   .fixed-prop-container {
     position: relative;
-    padding-bottom: 56.25%; /* for 16:9 ratio, adjust as needed */
+    padding-bottom: 70%; /* for 16:9 ratio, adjust as needed */
     height: 0;
     overflow: hidden;
     }
@@ -51,38 +51,71 @@ _styles: >
 ***
 # Data Analysis
 
-## Correlation Between Election Results' Diversity and Mobile Traffic Consumption's Diversity
+## Social Media Usage and Electoral Polarization
 
-We explore a captivating question - does a correlation exist between the diversity in election outcomes and the variance in mobile phone data usage?
+### Data Aggregation and Preparation
 
-Focusing on Paris, we delve into the variability of voting preferences during the 2019 European election. This diversity is quantified using the concept of entropy, an effective measure of the divergence in the public's voting decisions (For further information on entropy, see [here](https://en.wikipedia.org/wiki/Entropy_(information_theory))). A higher entropy indicates a more heterogeneous range of voting choices. The interactive map below presents the **entropy of election results** in Paris:
+Our data sets include mobile traffic data provided at the tile level (100x100 meter tiles) and electoral data available at the polling station level. Considering the prevalence of polling stations, most locations have a station within 300 meters. To facilitate a harmonized analysis, we aggregated both data sets at the iris level.
+
+Mobile traffic data was attributed to the iris intersecting the most with each 100x100 meter tile. For electoral data, we took the centroid of each iris and performed a recursive search. We initially focused on all polling stations within a 300-meter radius of the centroid, averaging their results and attribiting them to the iris. If an iris did not have polling stations within this initial radius, the radius was increased to 600 meters and the process repeated.
+
+Here is a map, at the iris level, of the diversity of voting preferences for the european election (measured by entropy). 
 
 <div class="l-page fixed-prop-container">
   <iframe src="{{ '/assets/election_project/entropy_elections_map.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-Upon observation, it appears that Paris' central regions exhibit lower entropy in election results compared to their peripheral counterparts, suggesting a more homogeneous voting pattern in the city center. What about mobile data consumption? Similar to our analysis of election results, we can apply the concept of entropy to mobile traffic consumption, highlighting differences in data usage across the population. The map of Paris below illustrates this:
+Upon observation, it appears that Paris' central regions exhibit less diverssity in voting preferences compared to their peripheral counterparts, suggesting a more homogeneous voting pattern in the city center.
 
+### Polarization of Electoral Results
+
+The first step in our analysis was to calculate the polarization of the electoral results for each iris. Each party was assigned a number between -1 and 1, representing its position on the left-right axis. Then, we computed the average position in an iris: this is the weighted average of party positions, with the weighting based on the number of votes each party received. Finally, polarization is defined as the average distance of a vote from the average position of the iris. The larger this average distance, the more the iris is polarized because people vote farther away from the average (and so more extreme).
+
+### Mobile Traffic Data and Polarization
+In the next phase of our research, we turned our attention towards mobile traffic data. Our focus was on analyzing the traffic between 7pm and midnight on weekdays, deliberately excluding holidays and anomaly days. This selective approach was taken to minimize the impact of confounding factors on our data.
+
+Our primary metric for assessing the "consumption" of a specific mobile service was its share of the total traffic within an iris. The rationale behind this choice lies in the differing market penetration rates of telecom operators like Orange across various irises.
+
+Absolute usage data can potentially skew results due to variations in the operator's market presence across different irises. In contrast, comparing the proportional share of a given service in total traffic neutralizes this potential source of bias, making this a more robust measure for our analysis.
+
+### Results
+
+First we plot the correlation of turnout, vote diversity (measured be entropy), polarization and party affiliation with shares of mobile service usage for some of the main mobile services:
 <div class="l-page fixed-prop-container">
-  <iframe src="{{ '/assets/election_project/entropy_consumption_map.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
+  <iframe src="{{ '/assets/election_project/entropy_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-Similarly, Paris' central regions display a lower entropy in mobile traffic consumption than the periphery, pointing towards more uniform data usage patterns in these areas. However, the fluctuation in mobile traffic entropy seems less pronounced than that of the election results.
-
-To better understand the relationship between these two parameters, a **correlation plot** is provided:
-
 <div class="l-page fixed-prop-container">
-  <iframe src="{{ '/assets/election_project/entropy_service_vs_entropy_election.html' | relative_url }}" frameborder='0' scrolling='yes' height="700px" width="100%" style="border: 1px dashed grey;"></iframe>
+  <iframe src="{{ '/assets/election_project/turnout_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-The correlation seems ambiguous at this point, warranting further examination.
+<div class="l-page fixed-prop-container">
+  <iframe src="{{ '/assets/election_project/polarization_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
+</div>
 
+<div class="l-page fixed-prop-container">
+  <iframe src="{{ '/assets/election_project/renaissance_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
+</div>
 
-## Facebook Usage and Electoral Polarization
+<div class="l-page fixed-prop-container">
+  <iframe src="{{ '/assets/election_project/la_france_insoumise_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
+</div>
 
-The correlation between social media consumption, specifically Facebook, and political polarization is a well-documented phenomenon. However, to the best of my knowledge, no studies have delved into this association on a granular spatial scale using actual election results.
+<div class="l-page fixed-prop-container">
+  <iframe src="{{ '/assets/election_project/prenez_le_pouvoir_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
+</div>
 
-In the map below, we depict the **electoral polarization** during the 2019 European election in Paris. This polarization is measured as the standard deviation of votes along the political spectrum (right-left axis). The broader the spread of votes along this axis, the higher the polarization.
+<div class="l-page fixed-prop-container">
+  <iframe src="{{ '/assets/election_project/europe_ecologie_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
+</div>
+
+What do we find?
+
+### More Details on Facebook Usage and Electoral Polarization
+
+We explore in greater detail the relationship between Facebook usage and electoral polarization in Paris.
+
+In the map below, we depict the **electoral polarization** during the 2019 European election in Paris.
 
 <div class="l-page fixed-prop-container">
   <iframe src="{{ '/assets/election_project/polarization_map.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
@@ -90,19 +123,16 @@ In the map below, we depict the **electoral polarization** during the 2019 Europ
 
 Interestingly, peripheral regions of Paris seem to exhibit greater polarization than the city center. Essentially, voting patterns in these outlying areas tend to span a wider range along the right-left axis. 
 
-Facebook usage data mirrors this trend. In the following map, we display the proportion of time spent on Facebook relative to total online time. Peripheral regions, as observed, spend a greater fraction of their online time on Facebook compared to central areas.
+Facebook's usage data mirrors this trend. In the following map, we display the proportion of time spent on Facebook relative to total online time. Peripheral regions spend a greater fraction of their online time on Facebook compared to central areas.
 
 <div class="l-page fixed-prop-container">
   <iframe src="{{ '/assets/election_project/fb_share_map.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-Our visual intuition from the maps is backed up by a correlation plot,
-
- showing a significant association between Facebook usage and electoral polarization. This correlation remains robust even after adjusting for a variety of potential confounding factors, including age, income, education, region's centrality, immigrant population, and unemployment rates. The variables we controlled for include DEC_MED19 (median income), DEC_GI19 (Gini index), P19_POP1529 (population share aged 15-19), P19_ACT_DIPLMIN (share of population without a Bac), P19_ACT_SUP2 (share of population with Bac +2), P19_CHOM1524 (unemployment rate among 15 to 24-year-olds), and P19_POP_ETR (share of population that is non-French). The correlation plot is presented below:
+Our visual intuition from the maps is backed up by a correlation plot, showing a significant association between Facebook usage and electoral polarization. This correlation remains robust even after adjusting for a variety of potential confounding factors, including age, income, education, region's centrality, immigrant population, and unemployment rates. The variables we controlled for include DEC_MED19 (median income), DEC_GI19 (Gini index), P19_POP1529 (population share aged 15-19), P19_ACT_DIPLMIN (share of population without a Bac), P19_ACT_SUP2 (share of population with Bac +2), P19_CHOM1524 (unemployment rate among 15 to 24-year-olds), and P19_POP_ETR (share of population that is non-French). The correlation plot is presented below:
 
 <div class="l-page fixed-prop-container">
   <iframe src="{{ '/assets/election_project/fb_share_vs_polarization.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-A striking finding from our analysis is that a 1% increase in the proportion of time spent on Facebook corresponds to an approximately 2% surge in electoral polarization, even when controlling for an array of variables.
 ***
