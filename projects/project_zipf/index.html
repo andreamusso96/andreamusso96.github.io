@@ -10,7 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Systems of Cities | Andrea  Musso</title>
     <meta name="author" content="Andrea  Musso">
-    <meta name="description" content="When and where does Zipf's law hold?">
+    <meta name="description" content="The website a PhD student interested in cities.
+">
     <meta name="keywords" content="cities, complexity, economics">
 
 
@@ -70,7 +71,7 @@
     <style type="text/css">
       .fixed-prop-container {
   position: relative;
-  padding-bottom: 70%; /* for 16:9 ratio, adjust as needed */
+  padding-bottom: 60%; /* for 16:9 ratio, adjust as needed */
   height: 0;
   overflow: hidden;
   }
@@ -89,7 +90,7 @@
 <d-front-matter>
     <script async type="text/json">{
       "title": "Systems of Cities",
-      "description": "When and where does Zipf's law hold?",
+      "description": "",
       "published": "June 1, 2023",
       "authors": [
         
@@ -174,7 +175,7 @@
 
       <d-title>
         <h1>Systems of Cities</h1>
-        <p>When and where does Zipf's law hold?</p>
+        <p></p>
       </d-title>
 
       <d-byline></d-byline>
@@ -183,27 +184,155 @@
         <d-contents>
           <nav class="l-text figcaption">
           <h3>Contents</h3>
-            <div><a href="#plots">Plots</a></div>
-            <div><a href="#literature">Literature</a></div>
+            <div><a href="#introduction">Introduction</a></div>
+            <div><a href="#data">Data</a></div>
+            <div><a href="#methods">Methods</a></div>
             
           </nav>
         </d-contents>
 
         <hr>
-<h1 id="data-analysis">Data Analysis</h1>
+<h1 id="introduction">Introduction</h1>
 
-<h2 id="social-media-usage-and-electoral-polarization">Social Media Usage and Electoral Polarization</h2>
+<p>Zipf’s and Gibrat’s law are two of the most famous laws in urban economics.
+There is, however, some debate about if and when they hold. 
+One of the main issues in this debate, in my view, is the ill definition of the context in which these laws hold: the system of cities.
+<strong>What is a system of cities and how can we define it?</strong>
+To date, systems of cities have typically been associated to countries. However, the country is a political entity, not an economic one.
+Therefore, it is not clear why the country should be the natural unit of analysis for systems of cities.
+This project looks at the early days of the US and attempts to establish how many systems of cities were present in the 1800s and when they started forming a single system.
+The idea is to use the US as a case study to understand how systems of cities form and how they evolve.</p>
 
-<h3 id="data-aggregation-and-preparation">Data Aggregation and Preparation</h3>
+<h2 id="data">Data</h2>
 
-<p>Our data sets include mobile traffic data provided at the tile level (100x100 meter tiles) and electoral data available at the polling station level. Considering the prevalence of polling stations, most locations have a station within 300 meters. To facilitate a harmonized analysis, we aggregated both data sets at the iris level.</p>
+<p>For the moment, I am using two sources of data. The first is a network database of transportation infrastructure in the US which comprises roads, railways and waterways from 1830 to 1920.
+Donaldson and Hornbeck <d-cite key="donaldson2016railroads"></d-cite> provide this data to study the effect of the railways on the US economy. This data contains:</p>
+<ul>
+  <li>A complete map of railways, waterways and wagon transport routes between counties.</li>
+  <li>An estimate of the transport cost between counties between 1830 and 1920.</li>
+</ul>
 
-<p>Mobile traffic data was attributed to the iris intersecting the most with each 100x100 meter tile. For electoral data, we took the centroid of each iris and performed a recursive search. We initially focused on all polling stations within a 300-meter radius of the centroid, averaging their results and attribiting them to the iris. If an iris did not have polling stations within this initial radius, the radius was increased to 600 meters and the process repeated.</p>
+<p>For the moment I only use the second part of the data, which is a matrix of transport costs between counties.
+I do so out of simplicity rather than some theoretical reason.
+The second data source is a <a href="https://github.com/cestastanford/historical-us-city-populations" rel="external nofollow noopener" target="_blank">database reporting the population of US cities</a> from 1800 to today.</p>
 
-<p>Here is a map, at the iris level, of the diversity of voting preferences for the european election (measured by entropy).</p>
+<h2 id="methods">Methods</h2>
+
+<h3 id="network-of-cities">Network of cities</h3>
+
+<p>As first step, I construct a city network, where cities represent nodes and edges are measured by a metric that approximates the “proximity” between two cities. 
+The definition of this “proximity” is crucial and I consider three different definitions which capture different aspects of the problem:</p>
+
+<ul>
+  <li>
+<strong>Inverse transport distance</strong>: Calculated as \(1/c^T\), where \(c^T\) represents the transport cost between two cities. This definition, however, disregards city sizes and is purely geographic.</li>
+  <li>
+<strong>Radiation proximity</strong>: Based on the flows predicted by the radiation model  <d-cite key="simini2012universal"></d-cite>. <strong>This approach tends to overestimate connections in sparse regions.</strong> The issue is that if there are no cities between two very distant cities, the model with tend to have a high proximity between those two distant cities. In modern times, geography is quite dense so this almost never occurs. But in the 1830s its a problem.</li>
+  <li>
+<strong>Gravity proximity</strong>: Utilizes the flows predicted by the gravity model. However, <strong>specifying the distance exponent remains an issue.</strong>
+</li>
+</ul>
+
+<h3 id="clustering">Clustering</h3>
+
+<p>After constructing the network of cities, my next step is to identify groups of cities within the network using community detection algorithms. I consider these groups to be “systems of cities”. To do this, I’ve tested a few different algorithms, each one works in a unique way:</p>
+
+<ol>
+  <li>
+    <p><strong>Stochastic block model (SBM)</strong>: This algorithm tries to find groups of cities that are likely to form communities based on the structure of the network. It does this by trying to maximize the fit of a stochastic block model to the network graph. What’s interesting about this model is that it allows for different types of community structures, not just the typical type where each community is a closely knit group with few connections to the outside. It can also handle structures where there’s a central core with peripheral nodes around it. I use the graph tool library to implement the SBM. This library also provides a way to force the model to only find assortative communities (those where nodes are more connected within the community than outside it) using the gt.PPBlockState function. However, this function can’t handle weights.</p>
+  </li>
+  <li>
+    <p><strong>Nested stochastic block model</strong>: This is like the regular SBM, but recursive. It works by first running the SBM on the network, then using the communities found to form a new graph where the nodes are the communities and the edges are weighted by the number of connections between the original communities. This process is then repeated. The graph tool library has an implementation for this as well, but it’s not perfect. For example, I can’t specify the mean of the distribution from which the edge weights are drawn (it bugs the code) and I can’t force it to only detect assortative communities. However, I think it wouldn’t be too difficult to create my own version of this algorithm that includes these features.</p>
+  </li>
+  <li>
+    <p><strong>Louvain</strong>: This is a widely used algorithm for optimizing modularity, a measure of the strength of division of a network into communities. It uses a two-step process that’s repeated until it reaches a local optimum for modularity. Initially, each city is its own community. Then, the algorithm repeatedly scans through all the cities to see if they can increase the overall modularity by joining a neighboring community. If so, the city joins the community that provides the biggest boost to modularity. If not, the city stays in its current community. After this, a new graph is created where the communities are the nodes and the edges are weighted by the number of connections between communities. This process then starts again with the new graph.</p>
+  </li>
+  <li>
+    <p><strong>Label propagation</strong>: This one works by giving each city a unique label and then repeatedly updating the labels based on the most common label among each city’s neighbors. Eventually, the labels stop changing and each community is made up of cities with the same label.</p>
+  </li>
+  <li>
+    <p><strong>Fluid</strong>: This algorithm is similar to label propagation but has some differences. It requires specifying the number of labels in advance and each label has a total “density” of 1. This density is divided among the cities with that label. Larger communities will have lower densities for each city. The labels are then updated based on the label with the highest density among a city’s neighbors.</p>
+  </li>
+  <li>
+    <p><strong>DBSCAN</strong>: This algorithm uses two parameters, epsilon and min(p), to define what a “core point” is. A core point is a city that has at least min(p) cities within epsilon distance. A city is a “periphery point” if it’s within epsilon distance of a core point, and an “outlier” if it’s neither a core nor a periphery point. Communities are made up of the core and periphery points.</p>
+  </li>
+  <li>
+    <p><strong>HDBSCAN</strong>: This is an upgraded version of DBSCAN that doesn’t require specifying the epsilon parameter. Instead, it intelligently varies this parameter across different communities to detect groups with differing densities. For a more in-depth explanation, the sklearn library documentation is a good resource.</p>
+  </li>
+  <li>
+    <p><strong>Geographic</strong>: Partition cities by latitude and longitude. For instance, cut the cities in two groups, each on one side of the Rocky Mountains.</p>
+  </li>
+</ol>
+
+<p><strong>Question:</strong> Which procedure seems most plausible to detect communities in cities?</p>
+
+<p>In order to feed networks to most of these methods (except DBSCAN and HDBSCAN), I need to filter out edges. I have, for the moment, adopted two approaches:</p>
+<ul>
+  <li>Maximum spanning tree: keep a maximum spanning tree as well as a percentage of the highest weighted edges.</li>
+  <li>Nearest neighbor: keep the k nearest neighbors of each node.</li>
+</ul>
+
+<h1 id="results">Results</h1>
+
+<h2 id="evolution-of-the-transport-network">Evolution of the transport network</h2>
+
+<p>Here are plots of the transport network in different years using the maximum spanning tree method. The most notable feature is that most high weight edges are in the north west. 
+The nodes are colored by the community they belong to as explained below.</p>
+
+<h2 id="nested-stochastic-block-model">Nested stochastic block model</h2>
+
+<p>Here are some results using the Nested stochastic block model algorithm for community detection on the 1890 cities network.
+After running the algorithm, we observe the block matrices of communities. These matrices are symmetric and the entry \(i,j\) represents the number of edges between communities \(i\) and \(j\).</p>
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/block_matrix_nested_sbm_spanning.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<p>Here we observe that at level 2 the algorithm detects 5 strongly assortative communities. 
+On a map these communities can be observed below.</p>
 
 <div class="l-page fixed-prop-container">
-    <embed src="/assets/zipf_project/geo.pdf" type="application/pdf"></embed>
+  <iframe src="/assets/zipf_project/1890_nested_sbm_map_spanning.pdf" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<p>On this map, the vertex halo color denotes the level 1 communities, the vertex color denotes the level 2 community and the shape the level three communities.</p>
+
+<p>Here, I repeat the same exercise by using the nearest neighbor instead of the spanning tree method.</p>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/block_matrix_nested_sbm_neighbor.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/1890_nested_sbm_map_neighbor.pdf" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<h3 id="population-statistics">Population statistics</h3>
+
+<p>Next, we can plot population statistics within these communities. Here are, a plot of Gibrat’s and Zipf’s law for the level 2 communities at the community level using the spanning tree method.</p>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/zipf_1890_1890_nested_sbm.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/growth_rates_1830_1890_nested_sbm.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<h2 id="geographic-partition">Geographic partition</h2>
+
+<p>I also tried to partition the cities in two groups, rockies and non-rockies.</p>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/geo_map.pdf" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<h3 id="population-statistics-1">Population statistics</h3>
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/zipf_1890_1890_geo.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/zipf_project/growth_rates_1830_1890_geo.html" style="border: 1px dashed grey;"></iframe>
 </div>
 
 <hr>
@@ -215,7 +344,7 @@
         <d-citation-list></d-citation-list>
       </d-appendix>
 
-      <d-bibliography src="/assets/bibliography/2018-12-22-distill.bib"></d-bibliography><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
+      <d-bibliography src="/assets/bibliography/zipf_project.bib"></d-bibliography><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;">
   <script>
     let giscusTheme = localStorage.getItem("theme");
     let giscusAttributes = {
