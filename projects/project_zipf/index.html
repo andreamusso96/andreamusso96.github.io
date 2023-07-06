@@ -8,9 +8,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Phone traffic and french elections | Andrea  Musso</title>
+    <title>Systems of Cities | Andrea  Musso</title>
     <meta name="author" content="Andrea  Musso">
-    <meta name="description" content="Some correlation plots between mobile phone traffic in the major french cities and french election results">
+    <meta name="description" content="When and where does Zipf's law hold?">
     <meta name="keywords" content="cities, complexity, economics">
 
 
@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="/assets/img/building_icon.png">
     
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://andreamusso96.github.io/projects/project_elections/">
+    <link rel="canonical" href="https://andreamusso96.github.io/projects/project_zipf/">
 
     <!-- Dark Mode -->
     
@@ -88,40 +88,10 @@
   <body>
 <d-front-matter>
     <script async type="text/json">{
-      "title": "Phone traffic and french elections",
-      "description": "Some correlation plots between mobile phone traffic in the major french cities and french election results",
+      "title": "Systems of Cities",
+      "description": "When and where does Zipf's law hold?",
       "published": "June 1, 2023",
       "authors": [
-        {
-          "author": "Andrea Musso",
-          "authorURL": "",
-          "affiliations": [
-            {
-              "name": "ETH Zurich",
-              "url": ""
-            }
-          ]
-        },
-        {
-          "author": "Gianluca Risi",
-          "authorURL": "",
-          "affiliations": [
-            {
-              "name": "Politecnico di Milano",
-              "url": ""
-            }
-          ]
-        },
-        {
-          "author": "Theodore Tallent",
-          "authorURL": "",
-          "affiliations": [
-            {
-              "name": "Sciences Po Paris",
-              "url": ""
-            }
-          ]
-        }
         
       ],
       "katex": {
@@ -203,8 +173,8 @@
     <div class="post distill">
 
       <d-title>
-        <h1>Phone traffic and french elections</h1>
-        <p>Some correlation plots between mobile phone traffic in the major french cities and french election results</p>
+        <h1>Systems of Cities</h1>
+        <p>When and where does Zipf's law hold?</p>
       </d-title>
 
       <d-byline></d-byline>
@@ -233,85 +203,7 @@
 <p>Here is a map, at the iris level, of the diversity of voting preferences for the european election (measured by entropy).</p>
 
 <div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/entropy_elections_map.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<p>Upon observation, it appears that Paris’ central regions exhibit less diverssity in voting preferences compared to their peripheral counterparts, suggesting a more homogeneous voting pattern in the city center.</p>
-
-<h3 id="polarization-of-electoral-results">Polarization of Electoral Results</h3>
-
-<p>The first step in our analysis was to calculate the polarization of the electoral results for each iris. Each party was assigned a number between -1 and 1, representing its position on the left-right axis. Then, we computed the average position in an iris: this is the weighted average of party positions, with the weighting based on the number of votes each party received. Finally, polarization is defined as the average distance of a vote from the average position of the iris. The larger this average distance, the more the iris is polarized because people vote farther away from the average (and so more extreme).</p>
-
-<h3 id="mobile-traffic-data-and-polarization">Mobile Traffic Data and Polarization</h3>
-<p>In the next phase of our research, we turned our attention towards mobile traffic data. Our focus was on analyzing the traffic between 7pm and midnight on weekdays, deliberately excluding holidays and anomaly days. This selective approach was taken to minimize the impact of confounding factors on our data.</p>
-
-<p>Our primary metric for assessing the “consumption” of a specific mobile service was its share of the total traffic within an iris. The rationale behind this choice lies in the differing market penetration rates of telecom operators like Orange across various irises.</p>
-
-<p>Absolute usage data can potentially skew results due to variations in the operator’s market presence across different irises. In contrast, comparing the proportional share of a given service in total traffic neutralizes this potential source of bias, making this a more robust measure for our analysis.</p>
-
-<h3 id="results">Results</h3>
-
-<p>First we plot the correlation of turnout, vote diversity (measured be entropy), polarization and party affiliation with shares of mobile service usage for some of the main mobile services:</p>
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/entropy_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/turnout_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/polarization_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/renaissance_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/la_france_insoumise_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/prenez_le_pouvoir_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/europe_ecologie_correlation.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<p>What do we find? Here are some observations</p>
-<ul>
-  <li>In Paris, it seems that either people vote for progressive movements or there is high polarization. This can be seen from the correlation of services both with entropy and with votes for far right parties.</li>
-  <li>Wikipedia is a predictor of progressiveness</li>
-  <li>People that vote for Macron have Apple stuff, so probably they are economically better off</li>
-  <li>Weird that e-commerce is highly correlated with populism</li>
-  <li>Ecologists listen to a lot of music, probably because they are young</li>
-  <li>People voting for macron and ecology are higher in turnout. Indeed, apps that predict progressive vote also predict turnout,</li>
-</ul>
-
-<h3 id="more-details-on-facebook-usage-and-electoral-polarization">More Details on Facebook Usage and Electoral Polarization</h3>
-
-<p>We explore in greater detail the relationship between Facebook usage and electoral polarization in Paris.</p>
-
-<p>In the map below, we depict the <strong>electoral polarization</strong> during the 2019 European election in Paris.</p>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/polarization_map.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<p>Interestingly, peripheral regions of Paris seem to exhibit greater polarization than the city center. Essentially, voting patterns in these outlying areas tend to span a wider range along the right-left axis.</p>
-
-<p>Facebook’s usage data mirrors this trend. In the following map, we display the proportion of time spent on Facebook relative to total online time. Peripheral regions spend a greater fraction of their online time on Facebook compared to central areas.</p>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/fb_share_map.html" style="border: 1px dashed grey;"></iframe>
-</div>
-
-<p>Our visual intuition from the maps is backed up by a correlation plot, showing a significant association between Facebook usage and electoral polarization. This correlation remains robust even after adjusting for a variety of potential confounding factors, including age, income, education, region’s centrality, immigrant population, and unemployment rates. The variables we controlled for include DEC_MED19 (median income), DEC_GI19 (Gini index), P19_POP1529 (population share aged 15-19), P19_ACT_DIPLMIN (share of population without a Bac), P19_ACT_SUP2 (share of population with Bac +2), P19_CHOM1524 (unemployment rate among 15 to 24-year-olds), and P19_POP_ETR (share of population that is non-French). The correlation plot is presented below:</p>
-
-<div class="l-page fixed-prop-container">
-  <iframe src="/assets/election_project/fb_share_vs_polarization.html" style="border: 1px dashed grey;"></iframe>
+    <embed src="/assets/zipf_project/geo.pdf" type="application/pdf"></embed>
 </div>
 
 <hr>
