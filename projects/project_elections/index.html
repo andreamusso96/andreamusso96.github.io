@@ -70,7 +70,7 @@
     <style type="text/css">
       .fixed-prop-container {
   position: relative;
-  padding-bottom: 70%; /* for 16:9 ratio, adjust as needed */
+  padding-bottom: 60%; /* for 16:9 ratio, adjust as needed */
   height: 0;
   overflow: hidden;
   }
@@ -249,7 +249,25 @@
 
 <p>Absolute usage data can potentially skew results due to variations in the operator’s market presence across different irises. In contrast, comparing the proportional share of a given service in total traffic neutralizes this potential source of bias, making this a more robust measure for our analysis.</p>
 
-<h3 id="results">Results</h3>
+<h1 id="results">Results</h1>
+
+<h2 id="new-plots-controlling-for-age-income-and-education">New plots controlling for Age, Income and Education</h2>
+<p>A heat map plot of the relationship between treatment (mobile service usage) and outcome (polarization, entropy, etc.) controlling for age, income and education. 
+The darker the color, the more IRIS fall inside the box with that combination of x-y values. In the inset you can see the regression coefficients for regressions controlling for various parameters.
+The magenta line is the mean value of the outcome variable for each value of the treatment variable.</p>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/election_project/figure_election_heatmap.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<p>Same as above but with scatter plots of the correlation between treatment and outcome for each IRIS. 
+The issue with the scatter plots is that there are too many points and they are too close to each other to be able to see well which areas are dense with points and which are not.</p>
+
+<div class="l-page fixed-prop-container">
+  <iframe src="/assets/election_project/figure_election_scatter.html" style="border: 1px dashed grey;"></iframe>
+</div>
+
+<h2 id="correlations">Correlations</h2>
 
 <p>First we plot the correlation of turnout, vote diversity (measured be entropy), polarization and party affiliation with shares of mobile service usage for some of the main mobile services:</p>
 <div class="l-page fixed-prop-container">
