@@ -109,7 +109,13 @@ First we plot the correlation of turnout, vote diversity (measured be entropy), 
   <iframe src="{{ '/assets/election_project/europe_ecologie_correlation.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-What do we find?
+What do we find? Here are some observations
+ - In Paris, it seems that either people vote for progressive movements or there is high polarization. This can be seen from the correlation of services both with entropy and with votes for far right parties. 
+ - Wikipedia is a predictor of progressiveness
+ - People that vote for Macron have Apple stuff, so probably they are economically better off
+ - Weird that e-commerce is highly correlated with populism
+ - Ecologists listen to a lot of music, probably because they are young
+ - People voting for macron and ecology are higher in turnout. Indeed, apps that predict progressive vote also predict turnout, 
 
 ### More Details on Facebook Usage and Electoral Polarization
 
