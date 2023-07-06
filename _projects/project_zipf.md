@@ -26,7 +26,7 @@ toc:
 _styles: >
   .fixed-prop-container {
     position: relative;
-    padding-bottom: 60%; /* for 16:9 ratio, adjust as needed */
+    padding-bottom: 56%; /* for 16:9 ratio, adjust as needed */
     height: 0;
     overflow: hidden;
     }
@@ -140,11 +140,11 @@ Here, I repeat the same exercise by using the nearest neighbor instead of the sp
 
 Next, we can plot population statistics within these communities. Here are, a plot of Gibrat's and Zipf's law for the level 2 communities at the community level using the spanning tree method.  
 
-<div class="l-page fixed-prop-container">
+<div class="l-screen fixed-prop-container">
   <iframe src="{{ '/assets/zipf_project/zipf_1890_1890_nested_sbm.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-<div class="l-page fixed-prop-container">
+<div class="l-screen fixed-prop-container">
   <iframe src="{{ '/assets/zipf_project/growth_rates_1830_1890_nested_sbm.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
@@ -157,11 +157,11 @@ I also tried to partition the cities in two groups, rockies and non-rockies.
 </div>
 
 ### Population statistics
-<div class="l-page fixed-prop-container">
+<div class="l-screen fixed-prop-container">
   <iframe src="{{ '/assets/zipf_project/zipf_1890_1890_geo.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
-<div class="l-page fixed-prop-container">
+<div class="l-screen fixed-prop-container">
   <iframe src="{{ '/assets/zipf_project/growth_rates_1830_1890_geo.html' | relative_url }}" style="border: 1px dashed grey;"></iframe>
 </div>
 
