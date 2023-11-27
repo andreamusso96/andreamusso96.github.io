@@ -20,7 +20,6 @@ I am a PhD student at [ETH Zurich](https://coss.ethz.ch/) under the supervision 
 Not so long ago, I obtained a Masters in Mathematics at ETH Zurich, and before that I completed a Bachelors at [EPFL](https://www.epfl.ch/en/).
 
 # research
-I am interested in cities as coordination mechanisms for economic growth. 
-In particular, I am interested in how complementarities among workers in cities generate agglomeration economies and how diffusion of innovation affects the spatial distribution of economic activity.
-
-I apply tools from network science, computational social science and economics to study these questions.
+My research focus is on leveraging large datasets and network science techniques to understand key economic phenomena. 
+Why are certain cities large and others small? What determines firm location choices? What characterizes highly adaptive teams? Why is the middle class hollowing? Why do people vote radical parties? These are the questions that animate my research.
+If you want to chat about these topics, feel free to reach out!
