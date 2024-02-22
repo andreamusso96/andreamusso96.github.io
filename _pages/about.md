@@ -20,6 +20,8 @@ I am a PhD student at [ETH Zurich](https://coss.ethz.ch/) under the supervision 
 Not so long ago, I obtained a Masters in Mathematics at ETH Zurich, and before that I completed a Bachelors at [EPFL](https://www.epfl.ch/en/).
 
 # research
-My research focus is on leveraging large datasets and network science techniques to understand key economic phenomena. 
-Why are certain cities large and others small? What determines firm location choices? What characterizes highly adaptive teams? Why is the middle class hollowing? Why do people vote radical parties? These are the questions that animate my research.
+My research focus is on leveraging large datasets and network science techniques to understand economic phenomena. 
+I work with a variety of data sources, including mobile data phone data, administrative data, and satellite imagery.
+The questions I am interested in are: Why are certain cities large and others small? What makes people in large cities more productive? What characterizes highly adaptive teams?
+What are the impacts of new technologies on health and well-being?
 If you want to chat about these topics, feel free to reach out!
