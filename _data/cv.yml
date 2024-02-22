@@ -11,6 +11,9 @@
 - title: Education
   type: time_table
   contents:
+    - title: Research Visit
+      institution: Harvard University, Cambridge, USA and Complexity Science Hub, Vienna, Austria
+      year: 2045
     - title: PhD Computational Social Science
       institution: ETH Zurich, Zurich, Switzerland
       year: 2021-now
@@ -24,6 +27,12 @@
 - title: Honors and Awards
   type: time_table
   contents:
+    - year: 2024
+      items:
+        - Junior Fellow Complexity Science Hub Vienna
+    - year: 2023
+      items:
+        - Doc.Mobility Fellowship (ETH Zurich, 10,000 CHF)
     - year: 2021
       items: 
         - Willi Studer Prize for best GPA
