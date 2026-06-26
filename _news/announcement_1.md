@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2021-09-01
+date: 2024-01-01
 inline: true
 related_posts: false
 ---
 
-Obtained an MSc in Mathematics from ETH Zurich.
+Started a research stay at the [Harvard Growth Lab](https://growthlab.hks.harvard.edu/) for January-March 2024.

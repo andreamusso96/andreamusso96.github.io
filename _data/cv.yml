@@ -11,12 +11,13 @@
 - title: Education
   type: time_table
   contents:
-    - title: Research Visit
-      institution: Harvard University, Cambridge, USA and Complexity Science Hub, Vienna, Austria
-      year: 2024
     - title: PhD Computational Social Science
       institution: ETH Zurich, Zurich, Switzerland
-      year: 2021-now
+      year: 2021-2026
+      description:
+        - Supervised by Dirk Helbing
+        - Defended on May 13, 2026
+        - Committee members: Ulrik Brandes and Marta Gonzalez
     - title: MSc Mathematics
       institution: ETH Zurich, Zurich, Switzerland
       year: 2018-2021
@@ -24,16 +25,26 @@
       institution: EPFL, Lausanne, Switzerland
       year: 2015-2018
 
+- title: Research Stays
+  type: time_table
+  contents:
+    - title: Visiting Researcher
+      institution: Harvard Growth Lab, Cambridge, USA
+      year: Jan-Mar 2024
+    - title: Junior Fellow
+      institution: Complexity Science Hub Vienna, Vienna, Austria
+      year: Mar-Sept 2024
+
 - title: Honors and Awards
   type: time_table
   contents:
     - year: 2024
       items:
-        - Junior Fellow Complexity Science Hub Vienna
+        - Junior Fellow, Complexity Science Hub Vienna
     - year: 2023
       items:
         - Doc.Mobility Fellowship (ETH Zurich, 10,000 CHF)
     - year: 2021
-      items: 
+      items:
         - Willi Studer Prize for best GPA
         - ETH Medal for outstanding MSc thesis
